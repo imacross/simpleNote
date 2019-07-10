@@ -198,15 +198,16 @@
                 crossorigin="anonymous"></script>
         <script>
 
-            var privatePassword = {{ selectData.password }}
+            var privatePassword = "{{ selectData.password }}";
+            console.log({{ selectData.password }});
                 $("#show").click(function () {
                     const inputValue = $("#privateInputPassword").val();
-                    if (inputValue == {{ selectData.password }}) {
-                        $('#privateModal').modal('hide')
-                        $('#privateDetailModal').modal('show')
+                    if (inputValue === "{{ selectData.password }}") {
+                        $('#privateModal').modal('hide');
+                        $('#privateDetailModal').modal('show');
 
                     } else {
-                        $('.wrongPassword').css("display", "block")
+                        $('.wrongPassword').css("display", "block");
                     }
 
                 });

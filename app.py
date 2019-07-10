@@ -1,7 +1,7 @@
 from flask import Flask,request,url_for,redirect,render_template
 from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://cagdas:123456@localhost:5432/postgres"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://simpleNoteSu:123456@localhost:5432/postgres"
 
 db = SQLAlchemy(app)
 class Note(db.Model): #note diye model tanımladım
