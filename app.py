@@ -42,23 +42,20 @@ def index():
         return redirect(url_for('index'))
     else:
         dataQuery = Note.query.all()
-        reverseData = []
-        for dataItem in dataQuery:
-            reverseData.append(dataItem)
-        reverseData.reverse()
+        dataQuery.reverse()
         id = 0
         selectData = 0
-        return render_template("index.html", dataQuery= reverseData, id = id, selectData = selectData)
+        return render_template("index.html", dataQuery= dataQuery, id = id, selectData = selectData)
 
 @app.route('/<string:id>/')
 def detail(id):
     dataQuery = Note.query.all()
-    reverseData = []
-    for dataItem in dataQuery:
-        reverseData.append(dataItem)
-    reverseData.reverse()
+    dataQuery.reverse()
     selectData = Note.query.filter_by(id=id).first()
-    return render_template('index.html', id=id ,dataQuery= reverseData, selectData = selectData)
+    if selectData == None :
+        return render_template('index.html', id=-1 ,dataQuery= dataQuery, selectData = selectData)
+    else:
+        return render_template('index.html', id=id ,dataQuery= dataQuery, selectData = selectData)
 if __name__ == '__main__':
     app.run()
 

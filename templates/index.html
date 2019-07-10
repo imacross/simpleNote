@@ -122,22 +122,22 @@
         </div>
 
 {# Public note detail #}
-        {% if id != 0 and selectData.isprivate != True %}
+        {% if id != 0 and id !=-1 and selectData.isprivate != True %}
             <!-- Modal -->
-            <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModal"
+            <div class="modal fade" data-keyboard="false"  id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModal"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title logo-small" id="exampleModalLongTitle">Simple Note</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <a href="/"><button type="button" class="close" >
+                                <span >&times;</span>
+                            </button></a>
                         </div>
                         <div class="modal-body">
                             <h4 class="detailHeader ">{{ selectData.header }}</h4>
                             <p class="detailContent">{{ selectData.note }}</p>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <a href="/"><button type="button" class="btn btn-danger" >Close</button></a>
                             <input type="text" name="link" class="link" value="www.simplenote.ml/{{ id }}">
                             <small class="form-text text-muted linkHelp">This is your link. Please keep it</small>
                         </div>
@@ -145,16 +145,16 @@
                 </div>
             </div>
 {# Private password control #}
-        {% elif id != 0 and selectData.isprivate == True %}
-            <div class="modal fade" id="privateModal" tabindex="-1" role="dialog" aria-labelledby="privateModal"
+        {% elif id != 0 and id !=-1 and selectData.isprivate == True %}
+            <div class="modal fade" id="privateModal"  data-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="privateModal"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title logo-small" id="exampleModalLongTitle">Simple Note</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <a href="/"><button type="button" class="close" >
+                                <span >&times;</span>
+                            </button></a>
                         </div>
                         <div class="modal-body">
                             <h3 class="privateHeader text-center poiret">This Content Is Private !</h3>
@@ -169,23 +169,43 @@
                 </div>
             </div>
 {# Private detail modal #}
-            <div class="modal fade" id="privateDetailModal" tabindex="-1" role="dialog"
+            <div class="modal fade" data-keyboard="false"  id="privateDetailModal" tabindex="-1" role="dialog"
                  aria-labelledby="privateDetailModal"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title logo-small" id="exampleModalLongTitle">Simple Note</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <a href="/"><button type="button" class="close" >
+                                <span >&times;</span>
+                            </button></a>
                         </div>
                         <div class="modal-body">
                             <h4 class="detailHeader ">{{ selectData.header }}</h4>
                             <p class="detailContent">{{ selectData.note }}</p>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <a href="/"><button type="button" class="btn btn-danger">Close</button></a>
                             <input type="text" name="link" class="link" value="www.simplenote.ml/{{ id }}">
                             <small class="form-text text-muted linkHelp">This is your link. Please keep it</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{# 404 modal #}
+        {% elif id == -1 %}
+           <div class="modal fade" data-keyboard="false"  id="404Modal" tabindex="-1" role="dialog" aria-labelledby="404Modal"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title logo-small" id="exampleModalLongTitle">Simple Note</h5>
+                            <a href="/"><button type="button" class="close" >
+                                <span >&times;</span>
+                            </button></a>
+                        </div>
+                        <div class="modal-body">
+                            <h1 class="404 sniglet text-center">404</h1>
+                            <h3 class="privateHeader text-center poiret">This Content Is Not Found!</h3>
+                            <h6 class="privateSubHeader text-center poiret">Please check your id</h6>
                         </div>
                     </div>
                 </div>
