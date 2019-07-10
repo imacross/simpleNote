@@ -1,0 +1,217 @@
+{% extends "layout.html" %}
+{# Logo block #}
+
+{% block header %}
+    <div class="logoDiv">
+        <h1 data-aos="fade-right" class="logo"><span class="logoSimple">Simple</span> <span class="logoNote">Note</span>
+        </h1>
+    </div>
+{% endblock %}
+
+{# Content block #}
+
+{% block content %}
+    <div class="container_custom">
+        {# SearchBar #}
+        <div class="d-flex justify-content-center h-100 searchDiv">
+            <div class="searchbar">
+                <input class="search_input" id="search_input" type="text" name="" placeholder="Search...">
+                <a href="#" id="search_icon" class="search_icon"><i class="fas fa-search"></i></a>
+            </div>
+        </div>
+        <div class="row">
+            {# Add Note #}
+            <div class="col-md-3">
+                <div class="addNote" data-toggle="modal" data-target="#inputModal" onmouseover="onHover();"
+                     onmouseout="offHover();">
+
+                    <h3 class="addNoteHeader">add note</h3>
+                    <img class="addNoteImg" src="../static/compose.png" alt="">
+                </div>
+            </div>
+            {% for dataItem in dataQuery %}
+                {% if dataItem.isprivate != True %} {# print public note #}
+                    <div class="col-md-3 cardCol" data-aos="flip-up">
+                        <a href="/{{ dataItem.id }}">
+                            <div class="card_custom" onmouseover="cardOver(this)" onmouseout="cardOut(this)">
+                                <div class="cardHeaderDiv"><h5 class="cardHeader">{{ dataItem.header }}</h5></div>
+                                <div class="cardBodyDiv"><p class="cardBody">{{ dataItem.note }}</p></div>
+                                <div class="row dateRow">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <div class="cardDateDiv"><p class="cardDate">08.07</p></div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="cardIdDiv">
+                                            <div class="cardId">#{{ dataItem.id }}  </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Modal -->
+{# Add note modal #}
+        <div class="modal fade" id="inputModal" tabindex="-1" role="dialog" aria-labelledby="inputModal"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title logo-small" id="exampleModalLabel">Simple Note</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/" method="post">
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="formHeader">Header</label>
+                                    <input type="text" class="form-control" id="formHeader" name="header"
+                                           aria-describedby="text" placeholder="Enter Header">
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="custom-control custom-switch ">
+                                        <input type="checkbox" placeholder="no" name="isprivate"
+                                               class="custom-control-input" id="formSwitch">
+                                        <label class="custom-control-label" for="formSwitch">Private</label>
+                                        <small id="formMuted" class="form-text text-muted">Set a private password
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group " id="showHide">
+                                        <input type="password" id="showHideIn" class="form-control" name="password"
+                                               placeholder="Password" aria-describedby="basic-addon2" disabled>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon2"><i class="fa fa-eye"
+                                                                                                id="passwordEye"
+                                                                                                aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group formIdGroup">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">#</div>
+                                        </div>
+                                        <input type="text" class="form-control" id="formId"
+                                               placeholder="{{ dataQuery[0].id + 1 }}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="formText">Note</label>
+                                <textarea class="form-control" name="note" placeholder="Enter Your Note" id="formText"
+                                          rows="8"></textarea>
+                            </div>
+                            <button type="button " class="btn btn-secondary sniglet" data-dismiss="modal">Close</button>
+                            <button type="submit" id="kapgit" class="btn btn-primary sniglet">Save</button>
+                            <input type="text" name="link" class="link"
+                                   value="www.simplenote.ml/{{ dataQuery[0].id + 1 }}">
+                            <small class="form-text text-muted linkHelp">This is your link. Please keep it</small>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{# Public note detail #}
+        {% if id != 0 and selectData.isprivate != True %}
+            <!-- Modal -->
+            <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModal"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title logo-small" id="exampleModalLongTitle">Simple Note</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h4 class="detailHeader ">{{ selectData.header }}</h4>
+                            <p class="detailContent">{{ selectData.note }}</p>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <input type="text" name="link" class="link" value="www.simplenote.ml/{{ id }}">
+                            <small class="form-text text-muted linkHelp">This is your link. Please keep it</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{# Private password control #}
+        {% elif id != 0 and selectData.isprivate == True %}
+            <div class="modal fade" id="privateModal" tabindex="-1" role="dialog" aria-labelledby="privateModal"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title logo-small" id="exampleModalLongTitle">Simple Note</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h3 class="privateHeader text-center poiret">This Content Is Private !</h3>
+                            <h6 class="privateSubHeader text-center poiret">Please enter your password</h6>
+                            <input type="text" name="privateInputPassword" id="privateInputPassword">
+                            <small class="form-text wrongPassword sniglet">Wrong password! Please try again.</small>
+                            <button type="button" class="btn btn-success show" id="show"><i
+                                    class="fas fa-arrow-right"></i></button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+{# Private detail modal #}
+            <div class="modal fade" id="privateDetailModal" tabindex="-1" role="dialog"
+                 aria-labelledby="privateDetailModal"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title logo-small" id="exampleModalLongTitle">Simple Note</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h4 class="detailHeader ">{{ selectData.header }}</h4>
+                            <p class="detailContent">{{ selectData.note }}</p>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <input type="text" name="link" class="link" value="www.simplenote.ml/{{ id }}">
+                            <small class="form-text text-muted linkHelp">This is your link. Please keep it</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <script>
+
+            var privatePassword = {{ selectData.password }}
+                $("#show").click(function () {
+                    const inputValue = $("#privateInputPassword").val();
+                    if (inputValue == {{ selectData.password }}) {
+                        $('#privateModal').modal('hide')
+                        $('#privateDetailModal').modal('show')
+
+                    } else {
+                        $('.wrongPassword').css("display", "block")
+                    }
+
+                });
+
+        </script>
+
+
+{% endblock %}
