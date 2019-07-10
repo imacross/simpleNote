@@ -1,5 +1,7 @@
 from flask import Flask,request,url_for,redirect,render_template
 from flask_sqlalchemy import SQLAlchemy
+import datetime
+
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://simpleNoteSu:123456@localhost:5432/postgres"
 
@@ -11,16 +13,13 @@ class Note(db.Model): #note diye model tanımladım
     note = db.Column(db.String)
     isprivate = db.Column(db.Boolean, server_default='f', default=False, nullable=False)
     password = db.Column(db.String)
+    date = db.Column(db.Date, default=datetime.datetime.now())
     #initi
     def __init__(self,header, note,password,isprivate):
         self.header = header
         self.note = note
         self.password = password
         self.isprivate = isprivate
-#note,isprivate,password
-   # def __repr__(self):
-    #    return f"Note('{self.header}','{self.note}','{self.isprivate}','{self.password}')"
-
 
 
 @app.route('/', methods = ['POST','GET'] )
