@@ -152,16 +152,25 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title logo-small" id="exampleModalLongTitle">Simple Note</h5>
+
+                            <div class="input-group formIdGroup" id="formIdGroup">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">#</div>
+                                </div>
+                                <input type="text" class="form-control" id="sId"
+                                       placeholder="{{ selectData.id  }}" readonly>
+                            </div>
                             <a href="/"><button type="button" class="close" >
                                 <span >&times;</span>
                             </button></a>
                         </div>
                         <div class="modal-body">
-                            <h3 class="privateHeader text-center poiret">This Content Is Private !</h3>
+
+                            <h3 class="privateHeader text-center poiret">This Content Is Private!</h3>
                             <h6 class="privateSubHeader text-center poiret">Please enter your password</h6>
-                            <input type="text" name="privateInputPassword" id="privateInputPassword">
+                            <input type="password" name="privateInputPassword" id="privateInputPassword">
                             <small class="form-text wrongPassword sniglet">Wrong password! Please try again.</small>
-                            <button type="button" class="btn btn-success show" id="show"><i
+                            <button type="button" class="btn btn-primary show" id="show"><i
                                     class="fas fa-arrow-right"></i></button>
 
                         </div>
@@ -181,8 +190,8 @@
                             </button></a>
                         </div>
                         <div class="modal-body">
-                            <h4 class="detailHeader ">{{ selectData.header }}</h4>
-                            <p class="detailContent">{{ selectData.note }}</p>
+                            <h4 class="detailHeader" id="privateHeader"></h4>
+                            <p class="detailContent" id="privateContent"></p>
                             <a href="/"><button type="button" class="btn btn-danger">Close</button></a>
                             <input type="text" name="link" class="link" value="www.simplenote.ml/{{ id }}">
                             <small class="form-text text-muted linkHelp">This is your link. Please keep it</small>
@@ -212,25 +221,23 @@
             </div>
 
         {% endif %}
-
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
 
-            var privatePassword = "{{ selectData.password }}";
-            console.log({{ selectData.password }});
-                $("#show").click(function () {
-                    const inputValue = $("#privateInputPassword").val();
-                    if (inputValue === "{{ selectData.password }}") {
-                        $('#privateModal').modal('hide');
-                        $('#privateDetailModal').modal('show');
-
-                    } else {
-                        $('.wrongPassword').css("display", "block");
-                    }
-
-                });
+            {#var privatePassword = "{{ selectData.password }}";#}
+            {#console.log({{ selectData.password }});#}
+            {#    $("#show").click(function () {#}
+            {#        const inputValue = $("#privateInputPassword").val();#}
+            {#        if (inputValue === "{{ selectData.password }}") {#}
+            {#            $('#privateModal').modal('hide');#}
+            {#            $('#privateDetailModal').modal('show');#}
+            {##}
+            {#        } else {#}
+            {#           #}
+            {#        }#}
+            {##}
+            {#    });#}
 
         </script>
 

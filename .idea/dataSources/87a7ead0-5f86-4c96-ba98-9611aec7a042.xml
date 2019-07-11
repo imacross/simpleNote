@@ -14,7 +14,7 @@
       <Comment>default administrative connection database</Comment>
       <StateNumber>566</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>855</IntrospectionStateNumber>
+      <IntrospectionStateNumber>905</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
       <Relations>sequence|table|16436|16438|1
@@ -141,7 +141,7 @@ sequence|table|16450|16452|1
       <Comment>standard public schema</Comment>
       <StateNumber>359</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>856</IntrospectionStateNumber>
+      <IntrospectionStateNumber>906</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -220,7 +220,7 @@ sequence|table|16450|16452|1
     <table id="33" parent="23" name="simplenotetable">
       <ObjectId>16438</ObjectId>
       <Owner>simpleNoteSu</Owner>
-      <StateNumber>736</StateNumber>
+      <StateNumber>885</StateNumber>
     </table>
     <table id="34" parent="23" name="table_name">
       <ObjectId>16452</ObjectId>
@@ -256,17 +256,24 @@ sequence|table|16450|16452|1
     </column>
     <column id="39" parent="33" name="password">
       <Position>5</Position>
-      <DataType>varchar(16)|0s</DataType>
-      <StateNumber>736</StateNumber>
+      <DataType>varchar(72)|0s</DataType>
+      <StateNumber>904</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="40" parent="33" name="simplenotetable_id_uindex">
+    <column id="40" parent="33" name="date">
+      <Position>6</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>889</StateNumber>
+      <DefaultExpression>now()</DefaultExpression>
+      <TypeId>1082</TypeId>
+    </column>
+    <index id="41" parent="33" name="simplenotetable_id_uindex">
       <ObjectId>16446</ObjectId>
       <StateNumber>737</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <column id="41" parent="34" name="id">
+    <column id="42" parent="34" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -274,14 +281,14 @@ sequence|table|16450|16452|1
       <DefaultExpression>nextval(&apos;table_name_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="42" parent="34" name="name">
+    <column id="43" parent="34" name="name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>750</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="43" parent="34" name="date">
+    <column id="44" parent="34" name="date">
       <Position>3</Position>
       <DataType>timestamp|0s</DataType>
       <StateNumber>841</StateNumber>

@@ -329,7 +329,7 @@ a:visited {
     width: 200px;
 }
 
-.link[type=text], #privateInputPassword[type=text] {
+.link[type=text], #privateInputPassword[type=password] {
     text-align: center;
     padding: 2px 10px;
     box-sizing: border-box;
@@ -339,7 +339,7 @@ a:visited {
 
 }
 
-.link[type=text]:focus, #privateInputPassword[type=text] {
+.link[type=text]:focus, #privateInputPassword[type=password] {
     outline: none;
 }
 
@@ -356,6 +356,7 @@ a:visited {
 #show {
     margin-top: 10px;
     background-color: #2B2D42;
+    outline: none;
 }
 
 .wrongPassword {
@@ -363,6 +364,19 @@ a:visited {
     color: #e74c3c;
     display: none;
 }
+
+#formIdGroup{
+    margin-top:0;
+    max-width: 82px;
+    margin-bottom: 5px;
+    position: relative;
+    left: 220px;
+
+}
+#formIdGroup::placeholder{
+    text-align: center;
+}
+
 
 /*
 font-family: 'Indie Flower', cursive;
