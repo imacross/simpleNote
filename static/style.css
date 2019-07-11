@@ -57,7 +57,7 @@ body {
     text-align: center;
     font-weight: 700;
     padding-top: 25px;
-    /*background-image: url(https://media.giphy.com/media/G0vaYbZDJV0cM/giphy.gif);*/
+    background-image: url(https://media.giphy.com/media/G0vaYbZDJV0cM/giphy.gif);
     background-size: cover;
     color: transparent;
     -moz-background-clip: text;
@@ -363,6 +363,12 @@ a:visited {
     text-align: center;
     color: #e74c3c;
     display: none;
+}
+.null{
+    color: #e74c3c;
+    display: none;
+    font-family: Sniglet;
+    margin-left:5px;
 }
 
 #formIdGroup{
